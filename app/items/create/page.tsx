@@ -12,6 +12,7 @@ export default async function CreatePage() {
       <form
       className="flex flex-col border p-8 rounded-xl space-y-4 max-w-md"
         action={createItemAction}
+        encType="multipart/form-data"
       >
         <Input required className="max-w-md" name="name" placeholder="Name your item" />
         <Input 
@@ -22,6 +23,16 @@ export default async function CreatePage() {
           step="0.01"
           placeholder="Base Price" 
         />
+        <div>
+          <label className="block text-sm font-medium mb-2">Upload Photo</label>
+          <Input 
+            required
+            type="file" 
+            name="image" 
+            accept="image/*"
+            className="max-w-md"
+          />
+        </div>
         <Button className="self-end" type="submit">Post Item</Button>
       </form>
     </main>

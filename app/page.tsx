@@ -18,12 +18,19 @@ export default async function HomePage() {
         Items For Sale
       </h1>
 
-      <div className="grid grid-cols-6 gap-4">
+      <div className="grid grid-cols-4 gap-4">
         {allItems.map((item) => (
-          <div key={item.id} className="border p-4 rounded-xl">
-            {item.name}
-            Base Price: ₹{item.startingPrice / 100} 
-            </div>
+          <div key={item.id} className="border p-4 rounded-xl overflow-hidden bg-gray-50"> 
+            {item.image && (
+              <div className="w-full h-40 mb-3 relative">
+                <img src={item.image} className="w-full h-full rounded" />
+              </div>
+            )}
+            
+              <h2 className="font-semibold">{item.name}</h2>
+              <h3 className="text-sm text-gray-600">Base Price: ₹{item.startingPrice / 100}</h3>
+            
+          </div>
         ))}
       </div>
     </main>

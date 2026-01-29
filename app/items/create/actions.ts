@@ -20,13 +20,22 @@ export async function createItemAction(formData: FormData) {
     }
 
     const startingPrice =  formData.get("startingPrice") as string;
+    const imageFile = formData.get("image") as File;
 
     const priceAsPaise = Math.floor(parseFloat(startingPrice) * 100);
+    
+    let imageData = null;
+    
+        const bytes = await imageFile.arrayBuffer();
+        const buffer = Buffer.from(bytes);
+        imageData = `data:${imageFile.type};base64,${buffer.toString("base64")}`;
+    
     
     await database.insert(items).values({
       name: formData.get("name") as string,
       startingPrice: priceAsPaise,
       userId: user.id,
+      image: imageData,
     });
     redirect("/");
 }
