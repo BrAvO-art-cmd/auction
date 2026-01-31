@@ -33,7 +33,7 @@ export default async function HomePage() {
               <h3 className="text-sm text-gray-600">Base Price: ₹{item.startingPrice / 100}</h3>
               
               <Button asChild>
-                <Link href={`/items/${item.id}/`}>Place Bid</Link>
+                <Link href={`/items/${item.id}/`}>View Details</Link>
               </Button>
           </div>
         ))}

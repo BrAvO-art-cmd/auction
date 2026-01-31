@@ -15,25 +15,29 @@ export function Header() {
     const session = useSession();
 
     return (
-        <div className="bg-gray-300 py-5">
-            <div className="container flex justify-between items-center pl-20">
+        <div className="bg-gray-100 py-5">
+            <div className="container flex justify-between items-center pl-20 ">
                     <div className="flex items-center gap-20">
                     <Link href="/" className="hover:underline flex items-center gap-2">
-                    <Image src="/logo.png" width="80" height="80" alt="Logo" />
-                    BidMarket
+                    <Image src="/logo.png" width="100" height="100" alt="Logo" />
+                    <span className="text-3xl font-bold">BidMarket</span>
                     </Link>
-                <div className="flex items-center gap-8">
-                    <Link href="/" className="hover:underline flex items-center gap-2">
-                    All Auctions
-                    </Link>
+                <div className="flex items-center gap-12">
+                    <button className="bg-gray-300 px-10 py-3 rounded-md border border-black text-black text-sm hover:shadow-[4px_4px_0px_0px_rgba(0,0,0)] transition duration-200">
+<Link href="/" className="flex items-center gap-2 font-bold text-m">
+                    ALL AUCTIONS
+                    </Link></button>
 {session.data?.user && (<>
-                    <Link href="/items/create" className="hover:underline flex items-center gap-2">
-                    Create Auction
-                    </Link>
+                                   <button className="px-10 py-3 rounded-md border border-black bg-gray-300 text-black text-sm hover:shadow-[4px_4px_0px_0px_rgba(0,0,0)] transition duration-200">
+<Link href="/items/create" className="flex items-center gap-2 font-bold text-m">
+                    CREATE AUCTION
+                    </Link></button>
 
-                    <Link href="/auctions" className="hover:underline flex items-center gap-2">
-                    My Auctions
-                    </Link></>
+                              <button className="px-10 py-3 rounded-md border border-black bg-gray-300 text-black text-sm hover:shadow-[4px_4px_0px_0px_rgba(0,0,0)] transition duration-200">
+<Link href="/auctions" className="flex items-center gap-2 font-bold text-m">
+                    MY AUCTIONS
+                    </Link></button>
+                    </>
 )}
                 </div>
                 </div>
@@ -81,7 +85,7 @@ export function Header() {
                             })
                           }
                         >
-                            Sign Out
+                            SIGN OUT
                                 </Button>
                                 ) : ( 
                                 <Button type="submit"
@@ -89,10 +93,13 @@ export function Header() {
                                     signIn()
                                 }
                                 >
-                                    Sign In
+                                    SIGN OUT
                                 </Button>)}</div>
                 </div>
             </div>
         </div>
     );    
 }
+<button className="px-4 py-2 rounded-md border border-black bg-white text-black text-sm hover:shadow-[4px_4px_0px_0px_rgba(0,0,0)] transition duration-200">
+  Sketch
+</button>

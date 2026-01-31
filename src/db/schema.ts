@@ -95,7 +95,6 @@ export const items = pgTable("auction_item", {
     currentBid: integer("currentBid").notNull(),
     image: text("image"),
     bidInterval: integer("bidInterval").notNull().default(100),
-    
 });
 
 export const bids = pgTable("auction_bid", {

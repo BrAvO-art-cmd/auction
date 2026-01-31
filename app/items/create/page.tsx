@@ -1,8 +1,14 @@
+"use client";
+
 import { Input } from "../../../src/components/ui/input"
 import { Button } from "../../../src/components/ui/button";
 import { createItemAction } from "./actions";
+import { DatePickerDemo } from "@/components/datepicker";
+import React from "react";
+import { useState } from "react"
 
-export default async function CreatePage() {
+export default function CreatePage() {
+  const [date, setDate] = useState<Date>(new Date());
 
   return (
     <main className="container mx-auto py-12 space-y-4">
@@ -32,6 +38,9 @@ export default async function CreatePage() {
             className="max-w-md"
           />
         </div>
+        <DatePickerDemo 
+        date={date}
+        setDate={setDate} />
         <Button className="self-end" type="submit">Post Item</Button>
       </form>
     </main>
