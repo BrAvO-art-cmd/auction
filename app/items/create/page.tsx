@@ -9,11 +9,10 @@ export default async function CreatePage() {
       <h1 className="text-4xl font-bold">
         Post an Item
       </h1>
-      <form
-      className="flex flex-col border p-8 rounded-xl space-y-4 max-w-md"
+      <form className="flex flex-col border p-8 rounded-xl space-y-4 max-w-md"
         action={createItemAction}
         encType="multipart/form-data"
-      >
+        >
         <Input required className="max-w-md" name="name" placeholder="Name your item" />
         <Input 
           required

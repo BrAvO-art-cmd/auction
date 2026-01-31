@@ -1,0 +1,52 @@
+import { Input } from "../../src/components/ui/input"
+import { Button } from "../../src/components/ui/button";
+import { database } from "../../src/db/database";
+import { bids as bidsSchema, items } from "../../src/db/schema";
+import { revalidatePath } from "next/cache";
+import SignIn from "@/src/components/sign-in";
+import { SignOut } from "@/src/components/sign-out";
+import { auth } from "@/src/auth";
+import { eq } from "drizzle-orm";
+import { EmptyState } from "./empty-state";
+
+export default async function MyAuctionPage() {
+  const session = await auth();
+  if(!session || !session.user) {
+    throw new Error("Unauthorized");
+  }
+  
+  const allItems = await database.query.items.findMany({
+    where: eq(items.userId, session.user.id!)
+  });
+
+  const hasItems = allItems.length > 0;
+
+  return (
+    <main className="container mx-auto py-12 space-y-4">
+      <h1 className="text-4xl font-bold">
+        Your Current Auctions
+      </h1>
+
+        {hasItems ? (
+            <div className="grid grid-cols-4 gap-4">
+        {allItems.map((item) => (
+          <div key={item.id} className="border p-4 rounded-xl overflow-hidden bg-gray-50"> 
+            {item.image && (
+              <div className="w-full h-40 mb-3 relative">
+                <img src={item.image} className="w-full h-full object-contain rounded" />
+              </div>
+            )}
+            
+              <h2 className="font-semibold">{item.name}</h2>
+              <h3 className="text-sm text-gray-600">Base Price: ₹{item.startingPrice / 100}</h3>
+            
+          </div>
+        ))}
+      </div>
+        ) : (
+            <EmptyState />
+)}
+    </main>
+  );
+}
+

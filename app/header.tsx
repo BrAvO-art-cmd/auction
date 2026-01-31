@@ -15,9 +15,17 @@ export async function Header() {
                     <Image src="/logo.png" width="80" height="80" alt="Logo" />
                     BidMarket
                     </Link>
-                <div>
+                <div className="flex items-center gap-8">
+                    <Link href="/" className="hover:underline flex items-center gap-2">
+                    All Auctions
+                    </Link>
+
                     <Link href="/items/create" className="hover:underline flex items-center gap-2">
-                    Auction an Item
+                    Create Auction
+                    </Link>
+
+                    <Link href="/auctions" className="hover:underline flex items-center gap-2">
+                    My Auctions
                     </Link>
                 </div>
                 </div>

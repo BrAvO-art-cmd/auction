@@ -6,6 +6,8 @@ import { revalidatePath } from "next/cache";
 import SignIn from "@/src/components/sign-in";
 import { SignOut } from "@/src/components/sign-out";
 import { auth } from "@/src/auth";
+import  Link  from "next/link";
+import Image from "next/image";
 
 export default async function HomePage() {
   const session = await auth();
@@ -13,7 +15,7 @@ export default async function HomePage() {
   const allItems = await database.query.items.findMany();
 
   return (
-    <main className="container mx-auto py-12 space-y-4">
+    <main className="mx-auto py-12 space-y-4 container">
       <h1 className="text-4xl font-bold">
         Items For Sale
       </h1>
@@ -23,16 +25,20 @@ export default async function HomePage() {
           <div key={item.id} className="border p-4 rounded-xl overflow-hidden bg-gray-50"> 
             {item.image && (
               <div className="w-full h-40 mb-3 relative">
-                <img src={item.image} className="w-full h-full rounded" />
+                <Image src={item.image} alt={item.name} width={400} height={400} className="w-full h-full object-cover rounded" />
               </div>
             )}
             
               <h2 className="font-semibold">{item.name}</h2>
               <h3 className="text-sm text-gray-600">Base Price: ₹{item.startingPrice / 100}</h3>
-            
+              
+              <Button asChild>
+                <Link href={`/items/${item.id}/`}>Place Bid</Link>
+              </Button>
           </div>
         ))}
       </div>
     </main>
   );
 }
+

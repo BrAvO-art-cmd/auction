@@ -96,4 +96,5 @@ export const items = pgTable("auction_item", {
     name: text("name").notNull(),
     startingPrice: integer("startingPrice").notNull().default(0),
     image: text("image"),
+    bidInterval: integer("bidInterval").notNull().default(100),
 });
