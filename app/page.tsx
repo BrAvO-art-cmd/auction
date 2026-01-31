@@ -25,7 +25,7 @@ export default async function HomePage() {
           <div key={item.id} className="border p-4 rounded-xl overflow-hidden bg-gray-50"> 
             {item.image && (
               <div className="w-full h-40 mb-3 relative">
-                <Image src={item.image} alt={item.name} width={400} height={400} className="w-full h-full object-cover rounded" />
+                <Image src={item.image} alt={item.name} width={200} height={200} className="w-full h-full object-cover rounded" />
               </div>
             )}
             

@@ -1,3 +1,4 @@
+import { relations } from "drizzle-orm";
 import { pgTable, serial, text, timestamp, integer, boolean, primaryKey } from "drizzle-orm/pg-core";
 import type { AdapterAccountType } from "next-auth/adapters";
 
@@ -84,10 +85,6 @@ export const authenticators = pgTable(
   ]
 )
 
-export const bids = pgTable("auction_bid", {
-    id: serial("id").primaryKey(),
-});
-
 export const items = pgTable("auction_item", {
     id: serial("id").primaryKey(),   
     userId: text("userId")
@@ -95,6 +92,23 @@ export const items = pgTable("auction_item", {
     .references(() => users.id, { onDelete: "cascade" }),
     name: text("name").notNull(),
     startingPrice: integer("startingPrice").notNull().default(0),
+    currentBid: integer("currentBid").notNull(),
     image: text("image"),
     bidInterval: integer("bidInterval").notNull().default(100),
+    
 });
+
+export const bids = pgTable("auction_bid", {
+    id: serial("id").primaryKey(),
+    amount: integer("amount").notNull(),
+    itemId: serial("itemId").notNull().references(() => items.id, {onDelete: "cascade"}),
+    userId: text("userId").notNull().references(() => users.id, {onDelete: "cascade" }),
+    timestamp: timestamp("timestamp", { mode: "date" }).notNull(),
+});
+
+export const usersRelations = relations(bids, ({ one }) => ({
+  user: one(users, {
+    fields: [bids.userId],
+    references: [users.id],
+  }),
+}));
